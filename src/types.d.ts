@@ -5,3 +5,12 @@ export interface ShowInterface {
     name: string;
   };
 }
+
+export interface ShowInfo {
+  name: string;
+  genres: string[];
+  image: {
+    medium: string;
+  };
+  summary: string;
+}

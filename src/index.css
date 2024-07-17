@@ -1,0 +1,16 @@
+.show-list {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  overflow-y: auto;
+}
+
+.showlist-item {
+  padding: 5px 0;
+  color: black;
+  text-decoration: none;
+}
+
+.showlist-item h5 {
+  text-decoration: none;
+}

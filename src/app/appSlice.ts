@@ -1,9 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ShowInterface } from "../types";
-import { fetchShows } from "./appThunks";
+import { ShowInfo, ShowInterface } from "../types";
+import { fetchInfo, fetchShows } from "./appThunks";
 
 export interface appState {
   showArray: ShowInterface[] | null;
+  oneShow: ShowInfo | null;
   inputValue: string;
   loading: boolean;
   error: boolean;
@@ -11,6 +12,7 @@ export interface appState {
 
 const initialState: appState = {
   showArray: null,
+  oneShow: null,
   inputValue: "",
   loading: false,
   error: false,
@@ -33,6 +35,17 @@ export const appSlice = createSlice({
       state.showArray = action.payload;
     });
     builder.addCase(fetchShows.rejected, (state) => {
+      state.loading = false;
+      state.error = true;
+    });
+    builder.addCase(fetchInfo.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchInfo.fulfilled, (state, action) => {
+      state.loading = false;
+      state.oneShow = action.payload;
+    });
+    builder.addCase(fetchInfo.rejected, (state) => {
       state.loading = false;
       state.error = true;
     });
