@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveInput } from "../../app/appSlice";
 import { fetchShows } from "../../app/appThunks";
 import ShowList from "../ShowList/ShowList";
+import Preloader from "../Preloader/Preloader";
 
 const SearchForm = () => {
   const value = useSelector((state: RootState) => state.app.inputValue);
   const dispatch: AppDispatch = useDispatch();
+  const tasksIsLoading = useSelector((state: RootState) => state.app.loading);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -17,6 +19,7 @@ const SearchForm = () => {
 
   return (
     <div className="container w-50">
+      {tasksIsLoading && <Preloader />}
       <Form>
         <Form.Group>
           <FormLabel>Введите название сериала</FormLabel>
